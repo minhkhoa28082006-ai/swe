@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán - Sweet Ping Bakery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .checkout-page { padding: 40px 0; }
+        .checkout-title { font-size: 2rem; font-weight: 800; margin-bottom: 30px; color: #831843; display: flex; align-items: center; gap: 12px; }
+        .checkout-container { display: grid; grid-template-columns: 1fr 400px; gap: 30px; }
+        .form-section { background: white; border-radius: 28px; padding: 28px; margin-bottom: 24px; border: 1px solid #fce7f3; }
+        .form-section h3 { color: #831843; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .form-row { margin-bottom: 18px; }
+        .form-row label { display: block; margin-bottom: 6px; color: #be185d; font-weight: 500; }
+        .form-row input, .form-row textarea { width: 100%; padding: 12px 16px; border: 1px solid #fbcfe8; border-radius: 12px; outline: none; }
+        .form-row-inline { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .payment-option { display: flex; align-items: center; gap: 12px; padding: 16px; border: 2px solid #fbcfe8; border-radius: 16px; cursor: pointer; margin-bottom: 12px; }
+        .payment-option.selected { border-color: #ec489a; background: #fff0f5; }
+        .order-summary { background: white; border-radius: 28px; padding: 28px; border: 1px solid #fce7f3; position: sticky; top: 100px; }
+        .order-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #fce7f3; }
+        .order-item-img { width: 60px; height: 60px; background: #fff0f5; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+        .order-item-img img { width: 100%; height: 100%; object-fit: contain; }
+        .order-item-info { flex: 1; }
+        .order-item-name { font-weight: 600; }
+        .order-item-price { color: #ec489a; font-weight: 600; }
+        .order-item-qty { font-size: 0.8rem; color: #be185d; margin-top: 4px; }
+        .order-item-total { font-weight: 700; color: #831843; }
+        .summary-line { display: flex; justify-content: space-between; padding: 10px 0; }
+        .summary-line.total { border-top: 2px solid #fce7f3; margin-top: 10px; padding-top: 15px; font-weight: 800; font-size: 1.2rem; }
+        .summary-line.total span:last-child { color: #ec489a; font-size: 1.4rem; }
+        .submit-btn { width: 100%; background: linear-gradient(135deg, #ec489a, #f472b6); color: white; border: none; padding: 16px; border-radius: 48px; font-weight: 700; margin-top: 20px; cursor: pointer; }
+        .cart-actions { display: flex; gap: 12px; margin-bottom: 20px; }
+        .cart-actions button { padding: 8px 16px; border-radius: 40px; cursor: pointer; background: none; }
+        .clear-btn { border: 1px solid #ec489a; color: #ec489a; }
+        .add-btn { border: 1px solid #831843; color: #831843; }
+        @media (max-width: 968px) { .checkout-container { grid-template-columns: 1fr; } .form-row-inline { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <div class="container">
+        <span><i class="fas fa-heart"></i> Bánh ngọt tươi mỗi ngày</span>
+        <span><i class="fas fa-truck-fast"></i> Miễn phí vận chuyển đơn từ 300k</span>
+        <span><i class="fas fa-clock"></i> Săn Bánh Giờ Vàng</span>
+    </div>
+</div>
+
+<div class="main-header">
+    <div class="container header-content">
+        <div class="logo"><a href="index.html"><h1>Sweet Ping Bakery</h1><p>Săn Bánh Giờ Vàng 🎯</p></a></div>
+        <div class="search-bar"><input type="text" placeholder="Bạn muốn bánh gì hôm nay?" id="searchInput"><button id="searchBtn"><i class="fas fa-search"></i></button></div>
+        <div class="cart-icon" onclick="location.href='cart.html'"><i class="fas fa-shopping-bag"></i><span>Giỏ hàng</span><span class="cart-count" id="cartCount">0</span></div>
+    </div>
+</div>
+
+<div class="container checkout-page">
+    <div class="checkout-title"><i class="fas fa-credit-card"></i> Thanh toán đơn hàng</div>
+    <div id="checkoutContent"></div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2025 Sweet Ping Bakery - Săn Bánh Giờ Vàng</p>
+    </div>
+</footer>
+
+<div id="toastMsg" class="toast-msg"></div>
+
+<script src="js/checkout.js"></script>
+</body>
+</html>
