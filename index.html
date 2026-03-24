@@ -2,12 +2,322 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Sweet Ping Bakery - Săn Bánh Giờ Vàng</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fff5f7, #ffe4ec);
+            color: #4a044e;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Top Bar */
+        .top-bar {
+            background: #831843;
+            color: #fce7f3;
+            padding: 10px 0;
+            font-size: 0.8rem;
+        }
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        /* Header */
+        .main-header {
+            background: white;
+            box-shadow: 0 4px 15px rgba(236,72,153,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 15px 0;
+            gap: 15px;
+        }
+        .logo h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #f472b6, #ec489a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo p {
+            font-size: 0.7rem;
+            color: #ec489a;
+        }
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            border: 2px solid #fbcfe8;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 10px 18px;
+            border: none;
+            outline: none;
+        }
+        .search-bar button {
+            background: #fdf2f8;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            color: #ec489a;
+        }
+        .cart-icon {
+            cursor: pointer;
+            background: #fdf2f8;
+            padding: 8px 18px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #fbcfe8;
+        }
+        .cart-count {
+            background: #ec489a;
+            color: white;
+            border-radius: 30px;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+        }
+        /* Flash Sale */
+        .flash-sale {
+            background: linear-gradient(135deg, #f472b6, #ec489a);
+            margin: 30px 0;
+            border-radius: 25px;
+            padding: 25px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .sale-info h2 {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .countdown {
+            background: rgba(131,24,67,0.5);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: flex;
+            gap: 15px;
+        }
+        .time-box {
+            text-align: center;
+        }
+        .time-box span:first-child {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: #831843;
+            padding: 5px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            min-width: 50px;
+        }
+        .time-label {
+            font-size: 0.6rem;
+            margin-top: 4px;
+        }
+        /* Section Title */
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 30px 0 20px;
+            border-left: 5px solid #ec489a;
+            padding-left: 15px;
+            color: #831843;
+        }
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(236,72,153,0.1);
+            border: 1px solid #fce7f3;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(236,72,153,0.2);
+        }
+        .flash-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #ec489a;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            z-index: 2;
+        }
+        .product-img {
+            background: #fff0f5;
+            padding: 25px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-img img {
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+        }
+        .product-info {
+            padding: 15px;
+        }
+        .product-title {
+            font-weight: 700;
+            color: #4a044e;
+            margin-bottom: 8px;
+        }
+        .price {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+        .current-price {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #ec489a;
+        }
+        .old-price {
+            font-size: 0.75rem;
+            color: #a21caf;
+            text-decoration: line-through;
+        }
+        .discount {
+            background: #fce7f3;
+            color: #be185d;
+            padding: 2px 6px;
+            border-radius: 15px;
+            font-size: 0.65rem;
+        }
+        .product-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .add-to-cart, .buy-now-btn {
+            flex: 1;
+            padding: 8px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+        .add-to-cart {
+            background: #831843;
+            color: white;
+            border: none;
+        }
+        .buy-now-btn {
+            background: #ec489a;
+            color: white;
+            border: none;
+        }
+        footer {
+            background: #831843;
+            color: #fbcfe8;
+            padding: 25px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .toast-msg {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #831843;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            z-index: 1100;
+            opacity: 0;
+            transition: 0.2s;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .toast-msg.show {
+            opacity: 1;
+            bottom: 30px;
+        }
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            .search-bar {
+                max-width: 100%;
+                width: 100%;
+            }
+            .cart-icon {
+                align-self: flex-end;
+            }
+            .flash-sale {
+                flex-direction: column;
+                text-align: center;
+            }
+            .countdown {
+                gap: 10px;
+                padding: 8px 15px;
+            }
+            .time-box span:first-child {
+                font-size: 1.2rem;
+                min-width: 40px;
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 15px;
+            }
+            .toast-msg {
+                white-space: normal;
+                text-align: center;
+                max-width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -15,20 +325,20 @@
     <div class="container">
         <span><i class="fas fa-heart"></i> Bánh ngọt tươi mỗi ngày</span>
         <span><i class="fas fa-truck-fast"></i> Miễn phí vận chuyển đơn từ 300k</span>
-        <span><i class="fas fa-clock"></i> Săn Bánh Giờ Vàng - Giảm đến 50%</span>
+        <span><i class="fas fa-clock"></i> Săn Bánh Giờ Vàng</span>
     </div>
 </div>
 
 <div class="main-header">
     <div class="container header-content">
         <div class="logo">
-            <a href="index.html">
+            <a href="index.html" style="text-decoration: none;">
                 <h1>Sweet Ping Bakery</h1>
                 <p>Săn Bánh Giờ Vàng 🎯</p>
             </a>
         </div>
         <div class="search-bar">
-            <input type="text" placeholder="Bạn muốn bánh gì hôm nay?" id="searchInput">
+            <input type="text" placeholder="Bạn muốn bánh gì?" id="searchInput">
             <button id="searchBtn"><i class="fas fa-search"></i></button>
         </div>
         <div class="cart-icon" onclick="location.href='cart.html'">
@@ -43,7 +353,7 @@
     <div class="flash-sale">
         <div class="sale-info">
             <h2><i class="fas fa-stopwatch"></i> SĂN BÁNH GIỜ VÀNG</h2>
-            <p>🔥 Giảm sốc đến 50% - Chốt đơn ngay kẻo lỡ! 🔥</p>
+            <p>🔥 Giảm sốc đến 50% - Chốt đơn ngay! 🔥</p>
         </div>
         <div class="countdown">
             <div class="time-box"><span id="hours">00</span><div class="time-label">Giờ</div></div>
@@ -53,7 +363,7 @@
     </div>
 
     <div class="section-title">
-        <i class="fas fa-bolt"></i> BÁNH HOT - SĂN NGAY KẺO HẾT
+        <i class="fas fa-bolt"></i> BÁNH HOT - SĂN NGAY!
     </div>
 
     <div class="product-grid" id="productGrid"></div>
@@ -61,13 +371,135 @@
 
 <footer>
     <div class="container">
-        <p>© 2025 Sweet Ping Bakery - Săn Bánh Giờ Vàng, Ngọt Ngào Mỗi Ngày</p>
+        <p>© 2025 Sweet Ping Bakery - Săn Bánh Giờ Vàng</p>
         <p><i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i> <i class="fab fa-tiktok"></i></p>
     </div>
 </footer>
 
 <div id="toastMsg" class="toast-msg">🍰 Đã thêm vào giỏ</div>
 
-<script src="js/main.js"></script>
+<script>
+// ==================== SẢN PHẨM ====================
+const products = [
+    { id: 1, name: "🍓 Bánh Kem Dâu Tây", price: 299000, oldPrice: 499000, discount: 40, icon: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400" },
+    { id: 2, name: "🍫 Cupcake Socola", price: 45000, oldPrice: 75000, discount: 40, icon: "https://i.pinimg.com/1200x/29/7a/38/297a38e097cf510aa0aeba42181447ed.jpg" },
+    { id: 3, name: "🍩 Donut Socola", price: 35000, oldPrice: 55000, discount: 36, icon: "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400" },
+    { id: 4, name: "🌈 Macaron 6 vị", price: 129000, oldPrice: 199000, discount: 35, icon: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=400" },
+    { id: 5, name: "🧀 Cheese Tart", price: 59000, oldPrice: 99000, discount: 40, icon: "https://i.pinimg.com/736x/3c/92/c0/3c92c00017072b39a5e8a16753e5b1b1.jpg" },
+    { id: 6, name: "🫐 Mousse Việt Quất", price: 79000, oldPrice: 129000, discount: 39, icon: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400" },
+    { id: 7, name: "☕ Tiramisu", price: 89000, oldPrice: 149000, discount: 40, icon: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400" },
+    { id: 8, name: "🥐 Croissant Bơ", price: 39000, oldPrice: 65000, discount: 40, icon: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400" }
+];
+
+// ==================== GIỎ HÀNG ====================
+let cart = [];
+
+function loadCart() {
+    let stored = localStorage.getItem("sweetping_cart");
+    if (stored) cart = JSON.parse(stored);
+    updateCartCount();
+}
+
+function saveCart() {
+    localStorage.setItem("sweetping_cart", JSON.stringify(cart));
+    updateCartCount();
+}
+
+function updateCartCount() {
+    let span = document.getElementById('cartCount');
+    if (span) span.innerText = cart.reduce((s, i) => s + i.quantity, 0);
+}
+
+function formatPrice(p) {
+    return p.toLocaleString('vi-VN') + '₫';
+}
+
+function addToCart(id) {
+    let p = products.find(p => p.id === id);
+    let exist = cart.find(i => i.id === id);
+    if (exist) exist.quantity++;
+    else cart.push({ id: p.id, name: p.name, price: p.price, icon: p.icon, quantity: 1 });
+    saveCart();
+    showToast(`🍰 Đã thêm ${p.name}`);
+}
+
+function buyNow(id) {
+    addToCart(id);
+    setTimeout(() => location.href = 'checkout.html', 300);
+}
+
+function renderProducts(filter = "") {
+    let grid = document.getElementById('productGrid');
+    let filtered = products.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
+    if (!filtered.length) {
+        grid.innerHTML = '<div style="text-align:center;padding:40px;">🍰 Không tìm thấy bánh</div>';
+        return;
+    }
+    grid.innerHTML = filtered.map(p => `
+        <div class="product-card">
+            <div class="flash-badge"><i class="fas fa-clock"></i> -${p.discount}%</div>
+            <div class="product-img"><img src="${p.icon}" alt="${p.name}" onerror="this.src='https://placehold.co/300x200/ffe4ec/ec489a?text=${encodeURIComponent(p.name)}'"></div>
+            <div class="product-info">
+                <div class="product-title">${p.name}</div>
+                <div class="price">
+                    <span class="current-price">${formatPrice(p.price)}</span>
+                    <span class="old-price">${formatPrice(p.oldPrice)}</span>
+                    <span class="discount">-${p.discount}%</span>
+                </div>
+                <div class="product-actions">
+                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${p.id})"><i class="fas fa-cart-plus"></i> Thêm</button>
+                    <button class="buy-now-btn" onclick="event.stopPropagation(); buyNow(${p.id})"><i class="fas fa-bolt"></i> Mua</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// ==================== COUNTDOWN ====================
+let countdown;
+function startCountdown() {
+    let end = localStorage.getItem("flashEnd");
+    if (!end || Date.now() > parseInt(end)) end = Date.now() + 2*60*60*1000;
+    localStorage.setItem("flashEnd", end);
+    let update = () => {
+        let remain = parseInt(end) - Date.now();
+        if (remain <= 0) {
+            clearInterval(countdown);
+            document.getElementById('hours').innerText = '00';
+            document.getElementById('minutes').innerText = '00';
+            document.getElementById('seconds').innerText = '00';
+            return;
+        }
+        document.getElementById('hours').innerText = Math.floor(remain/3600000).toString().padStart(2,'0');
+        document.getElementById('minutes').innerText = Math.floor((remain%3600000)/60000).toString().padStart(2,'0');
+        document.getElementById('seconds').innerText = Math.floor((remain%60000)/1000).toString().padStart(2,'0');
+    };
+    update();
+    countdown = setInterval(update, 1000);
+}
+
+// ==================== TOAST ====================
+let toastTimeout;
+function showToast(msg) {
+    let toast = document.getElementById('toastMsg');
+    toast.innerText = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+function handleSearch() {
+    renderProducts(document.getElementById('searchInput').value);
+}
+
+// ==================== KHỞI TẠO ====================
+document.addEventListener('DOMContentLoaded', () => {
+    loadCart();
+    renderProducts();
+    startCountdown();
+    document.getElementById('searchBtn').onclick = handleSearch;
+    document.getElementById('searchInput').onkeyup = e => e.key === 'Enter' && handleSearch();
+});
+</script>
 </body>
 </html>

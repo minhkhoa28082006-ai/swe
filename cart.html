@@ -2,42 +2,60 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Giỏ hàng - Sweet Ping Bakery</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #fff5f7, #ffe4ec); color: #4a044e; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .top-bar { background: #831843; color: #fce7f3; padding: 10px 0; font-size: 0.8rem; }
+        .top-bar .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .main-header { background: white; box-shadow: 0 4px 15px rgba(236,72,153,0.1); position: sticky; top: 0; z-index: 100; }
+        .header-content { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 15px 0; gap: 15px; }
+        .logo h1 { font-family: 'Dancing Script', cursive; font-size: 1.8rem; background: linear-gradient(135deg, #f472b6, #ec489a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo p { font-size: 0.7rem; color: #ec489a; }
+        .search-bar { flex: 1; max-width: 400px; display: flex; border: 2px solid #fbcfe8; border-radius: 50px; overflow: hidden; }
+        .search-bar input { flex: 1; padding: 10px 18px; border: none; outline: none; }
+        .search-bar button { background: #fdf2f8; border: none; padding: 0 20px; cursor: pointer; color: #ec489a; }
+        .cart-icon { cursor: pointer; background: #fdf2f8; padding: 8px 18px; border-radius: 50px; display: flex; align-items: center; gap: 8px; border: 1px solid #fbcfe8; }
+        .cart-count { background: #ec489a; color: white; border-radius: 30px; padding: 2px 8px; font-size: 0.7rem; }
         .cart-page { padding: 40px 0; min-height: 60vh; }
-        .cart-title { font-size: 2rem; font-weight: 800; margin-bottom: 30px; color: #831843; display: flex; align-items: center; gap: 12px; }
-        .cart-container { display: grid; grid-template-columns: 1fr 380px; gap: 30px; }
-        .cart-items { background: white; border-radius: 28px; padding: 24px; border: 1px solid #fce7f3; }
-        .cart-header-row { display: grid; grid-template-columns: 80px 1fr 120px 140px 100px 60px; gap: 15px; padding: 15px 0; border-bottom: 2px solid #fce7f3; font-weight: 700; color: #be185d; }
-        .cart-row { display: grid; grid-template-columns: 80px 1fr 120px 140px 100px 60px; gap: 15px; align-items: center; padding: 20px 0; border-bottom: 1px solid #fce7f3; }
-        .cart-img { width: 70px; height: 70px; background: #fff0f5; border-radius: 16px; display: flex; align-items: center; justify-content: center; }
+        .cart-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; color: #831843; display: flex; align-items: center; gap: 10px; }
+        .cart-container { display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
+        .cart-items { background: white; border-radius: 20px; padding: 20px; border: 1px solid #fce7f3; }
+        .cart-header { display: grid; grid-template-columns: 80px 1fr 100px 120px 80px 50px; gap: 10px; padding: 12px 0; border-bottom: 2px solid #fce7f3; font-weight: 700; color: #be185d; font-size: 0.8rem; }
+        .cart-row { display: grid; grid-template-columns: 80px 1fr 100px 120px 80px 50px; gap: 10px; align-items: center; padding: 15px 0; border-bottom: 1px solid #fce7f3; }
+        .cart-img { width: 65px; height: 65px; background: #fff0f5; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
         .cart-img img { width: 100%; height: 100%; object-fit: contain; }
-        .cart-name { font-weight: 600; color: #4a044e; }
+        .cart-name { font-weight: 600; font-size: 0.85rem; }
         .cart-price { font-weight: 700; color: #ec489a; }
-        .cart-qty { display: flex; align-items: center; gap: 12px; }
-        .cart-qty button { width: 32px; height: 32px; border: 1px solid #fbcfe8; background: white; border-radius: 10px; cursor: pointer; }
+        .cart-qty { display: flex; align-items: center; gap: 8px; }
+        .cart-qty button { width: 28px; height: 28px; border: 1px solid #fbcfe8; background: white; border-radius: 8px; cursor: pointer; }
         .cart-subtotal { font-weight: 800; color: #831843; }
-        .cart-remove { background: none; border: none; color: #ec489a; font-size: 1.2rem; cursor: pointer; }
-        .cart-summary { background: white; border-radius: 28px; padding: 28px; border: 1px solid #fce7f3; position: sticky; top: 100px; }
-        .summary-row { display: flex; justify-content: space-between; padding: 12px 0; }
-        .summary-row.total { border-top: 2px solid #fce7f3; margin-top: 12px; padding-top: 20px; font-weight: 800; font-size: 1.2rem; }
-        .summary-row.total span:last-child { color: #ec489a; font-size: 1.4rem; }
-        .coupon-group { display: flex; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #fce7f3; }
-        .coupon-group input { flex: 1; padding: 12px; border: 1px solid #fbcfe8; border-radius: 48px; }
-        .coupon-group button { background: #fce7f3; border: none; padding: 12px 24px; border-radius: 48px; cursor: pointer; color: #be185d; }
-        .checkout-btn { width: 100%; background: linear-gradient(135deg, #ec489a, #f472b6); color: white; border: none; padding: 16px; border-radius: 48px; font-weight: 700; margin-top: 20px; cursor: pointer; }
-        .continue-btn { display: block; text-align: center; margin-top: 15px; color: #ec489a; text-decoration: none; }
-        .empty-cart { text-align: center; padding: 80px; background: white; border-radius: 28px; }
-        @media (max-width: 968px) {
+        .cart-remove { background: none; border: none; color: #ec489a; font-size: 1rem; cursor: pointer; }
+        .cart-summary { background: white; border-radius: 20px; padding: 20px; border: 1px solid #fce7f3; position: sticky; top: 100px; }
+        .summary-row { display: flex; justify-content: space-between; padding: 10px 0; }
+        .summary-row.total { border-top: 2px solid #fce7f3; margin-top: 10px; padding-top: 15px; font-weight: 800; font-size: 1.1rem; }
+        .summary-row.total span:last-child { color: #ec489a; font-size: 1.2rem; }
+        .coupon-group { display: flex; gap: 10px; margin-top: 20px; padding-top: 15px; border-top: 1px solid #fce7f3; }
+        .coupon-group input { flex: 1; padding: 10px; border: 1px solid #fbcfe8; border-radius: 40px; outline: none; }
+        .coupon-group button { background: #fce7f3; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; color: #be185d; }
+        .checkout-btn { width: 100%; background: linear-gradient(135deg, #ec489a, #f472b6); color: white; border: none; padding: 14px; border-radius: 40px; font-weight: 700; margin-top: 20px; cursor: pointer; }
+        .empty-cart { text-align: center; padding: 60px; background: white; border-radius: 20px; }
+        footer { background: #831843; color: #fbcfe8; padding: 25px 0; text-align: center; margin-top: 40px; }
+        .toast-msg { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #831843; color: white; padding: 10px 20px; border-radius: 40px; z-index: 1100; opacity: 0; transition: 0.2s; }
+        .toast-msg.show { opacity: 1; bottom: 30px; }
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; }
+            .search-bar { max-width: 100%; width: 100%; }
             .cart-container { grid-template-columns: 1fr; }
-            .cart-header-row { display: none; }
+            .cart-header { display: none; }
             .cart-row { grid-template-columns: 1fr; gap: 12px; text-align: center; }
             .cart-img { margin: 0 auto; }
+            .cart-qty { justify-content: center; }
         }
     </style>
 </head>
@@ -53,8 +71,8 @@
 
 <div class="main-header">
     <div class="container header-content">
-        <div class="logo"><a href="index.html"><h1>Sweet Ping Bakery</h1><p>Săn Bánh Giờ Vàng 🎯</p></a></div>
-        <div class="search-bar"><input type="text" placeholder="Bạn muốn bánh gì hôm nay?" id="searchInput"><button id="searchBtn"><i class="fas fa-search"></i></button></div>
+        <div class="logo"><a href="index.html" style="text-decoration: none;"><h1>Sweet Ping Bakery</h1><p>Săn Bánh Giờ Vàng 🎯</p></a></div>
+        <div class="search-bar"><input type="text" placeholder="Bạn muốn bánh gì?" id="searchInput"><button id="searchBtn"><i class="fas fa-search"></i></button></div>
         <div class="cart-icon" onclick="location.href='cart.html'"><i class="fas fa-shopping-bag"></i><span>Giỏ hàng</span><span class="cart-count" id="cartCount">0</span></div>
     </div>
 </div>
@@ -64,14 +82,98 @@
     <div id="cartContent"></div>
 </div>
 
-<footer>
-    <div class="container">
-        <p>© 2025 Sweet Ping Bakery - Săn Bánh Giờ Vàng</p>
-    </div>
-</footer>
-
+<footer><div class="container"><p>© 2025 Sweet Ping Bakery - Săn Bánh Giờ Vàng</p></div></footer>
 <div id="toastMsg" class="toast-msg"></div>
 
-<script src="js/cart.js"></script>
+<script>
+let cart = [];
+let coupon = null;
+
+function loadCart() {
+    let stored = localStorage.getItem("sweetping_cart");
+    if (stored) cart = JSON.parse(stored);
+    let savedCoupon = localStorage.getItem("sweetping_coupon");
+    if (savedCoupon) coupon = JSON.parse(savedCoupon);
+    updateCartCount();
+    renderCart();
+}
+
+function saveCart() {
+    localStorage.setItem("sweetping_cart", JSON.stringify(cart));
+    updateCartCount();
+    renderCart();
+}
+
+function updateCartCount() {
+    let span = document.getElementById('cartCount');
+    if (span) span.innerText = cart.reduce((s, i) => s + i.quantity, 0);
+}
+
+function formatPrice(p) {
+    return p.toLocaleString('vi-VN') + '₫';
+}
+
+function updateQty(id, delta) {
+    let idx = cart.findIndex(i => i.id === id);
+    if (idx !== -1) {
+        let newQty = cart[idx].quantity + delta;
+        if (newQty <= 0) cart.splice(idx, 1);
+        else cart[idx].quantity = newQty;
+        saveCart();
+        showToast(newQty <= 0 ? "🗑 Đã xóa" : "🔄 Đã cập nhật");
+    }
+}
+
+function removeItem(id) {
+    cart = cart.filter(i => i.id !== id);
+    saveCart();
+    showToast("🗑 Đã xóa");
+}
+
+function clearCart() {
+    if (cart.length === 0) return;
+    if (confirm("Xóa tất cả?")) { cart = []; saveCart(); showToast("🗑 Đã xóa"); }
+}
+
+function applyCoupon() {
+    let code = document.getElementById('couponCode').value.trim().toUpperCase();
+    let coupons = { 'SAVE10': { type: 'percent', value: 10, name: 'SAVE10 - Giảm 10%' }, 'SAVE20': { type: 'percent', value: 20, name: 'SAVE20 - Giảm 20%' }, 'FREESHIP': { type: 'fixed', value: 30000, name: 'FREESHIP - Miễn phí ship' }, 'WELCOME50': { type: 'fixed', value: 50000, name: 'WELCOME50 - Giảm 50k' } };
+    if (coupons[code]) { coupon = coupons[code]; localStorage.setItem("sweetping_coupon", JSON.stringify(coupon)); showToast(`✅ Áp dụng ${coupon.name}`); renderCart(); }
+    else showToast("❌ Mã không hợp lệ");
+}
+
+function removeCoupon() { coupon = null; localStorage.removeItem("sweetping_coupon"); showToast("🗑 Đã xóa mã"); renderCart(); }
+
+function calcTotal() {
+    let subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+    let discount = 0;
+    if (coupon) { if (coupon.type === 'percent') discount = subtotal * coupon.value / 100; else discount = coupon.value; discount = Math.min(discount, subtotal); }
+    let shipping = subtotal > 0 ? (subtotal >= 300000 ? 0 : 30000) : 0;
+    return { subtotal, discount, shipping, total: subtotal - discount + shipping };
+}
+
+function goCheckout() {
+    if (cart.length === 0) { showToast("🛍 Giỏ hàng trống!"); return; }
+    if (coupon) localStorage.setItem("sweetping_coupon", JSON.stringify(coupon));
+    location.href = 'checkout.html';
+}
+
+function renderCart() {
+    let container = document.getElementById('cartContent');
+    if (!container) return;
+    if (cart.length === 0) { container.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-cart" style="font-size: 4rem; color: #fbcfe8;"></i><h3>🍰 Giỏ hàng trống</h3><a href="index.html" class="checkout-btn" style="display: inline-block; width: auto; padding: 12px 30px;">Mua sắm ngay</a></div>`; return; }
+    let { subtotal, discount, shipping, total } = calcTotal();
+    let itemsHtml = '';
+    cart.forEach(item => { itemsHtml += `<div class="cart-row"><div class="cart-img"><img src="${item.icon}" onerror="this.src='https://placehold.co/65x65/ffe4ec/ec489a?text=Cake'"></div><div class="cart-name">${item.name}</div><div class="cart-price">${formatPrice(item.price)}</div><div class="cart-qty"><button onclick="updateQty(${item.id}, -1)">-</button><span>${item.quantity}</span><button onclick="updateQty(${item.id}, 1)">+</button></div><div class="cart-subtotal">${formatPrice(item.price * item.quantity)}</div><button class="cart-remove" onclick="removeItem(${item.id})"><i class="fas fa-trash-alt"></i></button></div>`; });
+    container.innerHTML = `<div class="cart-container"><div class="cart-items"><div class="cart-header"><div></div><div>Tên bánh</div><div>Đơn giá</div><div>Số lượng</div><div>Thành tiền</div><div></div></div>${itemsHtml}<div style="text-align: right; margin-top: 15px;"><button onclick="clearCart()" style="background: none; border: 1px solid #ec489a; color: #ec489a; padding: 6px 18px; border-radius: 30px;">Xóa tất cả</button></div></div><div class="cart-summary"><h3 style="color:#831843;">Thông tin đơn hàng</h3><div class="summary-row"><span>Tạm tính:</span><span>${formatPrice(subtotal)}</span></div>${coupon ? `<div class="summary-row" style="color:#10b981;"><span>Giảm giá (${coupon.name}):</span><span>- ${formatPrice(discount)}</span></div><div style="text-align:right;"><button onclick="removeCoupon()" style="background:none; border:none; color:#ec489a;">Xóa mã</button></div>` : ''}<div class="summary-row"><span>Phí vận chuyển:</span><span>${shipping === 0 ? 'Miễn phí' : formatPrice(shipping)}</span></div><div class="summary-row total"><span>Tổng cộng:</span><span>${formatPrice(total)}</span></div><div class="coupon-group"><input type="text" id="couponCode" placeholder="Mã: SAVE10, SAVE20, FREESHIP, WELCOME50"><button onclick="applyCoupon()">Áp dụng</button></div><button class="checkout-btn" onclick="goCheckout()"><i class="fas fa-credit-card"></i> Thanh toán</button><a href="index.html" style="display:block;text-align:center;margin-top:12px;color:#ec489a;">← Tiếp tục mua</a></div></div>`;
+}
+
+let toastTimeout;
+function showToast(msg) { let toast = document.getElementById('toastMsg'); toast.innerText = msg; toast.classList.add('show'); clearTimeout(toastTimeout); toastTimeout = setTimeout(() => toast.classList.remove('show'), 2000); }
+
+function handleSearch() { let kw = document.getElementById('searchInput').value; if (kw.trim()) localStorage.setItem('searchKw', kw); location.href = 'index.html'; }
+
+document.addEventListener('DOMContentLoaded', () => { loadCart(); document.getElementById('searchBtn').onclick = handleSearch; document.getElementById('searchInput').onkeyup = e => e.key === 'Enter' && handleSearch(); });
+</script>
 </body>
 </html>
